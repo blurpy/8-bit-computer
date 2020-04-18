@@ -12,4 +12,4 @@ Example program that calculates 28+14 and displays the result on the display.
 |      |1110|0001 1100|The value 28|
 |      |1111|0000 1110|The value 14|
 
-[![YouTube video of computer](resources/yt-add-two-numbers-thumb.png)](http://www.youtube.com/watch?v=i1SjtPZZONY "Click to play")
+[![YouTube video of computer](../resources/yt-add-two-numbers-thumb.png)](http://www.youtube.com/watch?v=i1SjtPZZONY "Click to play")
