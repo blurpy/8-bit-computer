@@ -4,9 +4,9 @@ Example program that calculates 28+14 and displays the result on the display.
 
 |#|Instruction|Address|Memory|Comment|
 |---|------|----|---------|------------|
-|0|LDA 14|0000|0001 1110|Put content of memory address 14 into A register|
-|1|ADD 15|0001|0010 1111|Put content of memory address 15 into B register,<br> and add the sum of A+B into A register|
-|2|OUT   |0010|1110 0000|Output the value of the A register|
+|0|LDA 14|0000|0001 1110|Put value of memory address 14 into A-register|
+|1|ADD 15|0001|0010 1111|Put value of memory address 15 into B-register,<br> and add the sum of A+B into A-register|
+|2|OUT   |0010|1110 0000|Output the value of the A-register|
 |3|HLT   |0011|1111 0000|Halt the computer|
 ||      |    |         ||
 |14|      |1110|0001 1100|The value 28|
