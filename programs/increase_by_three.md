@@ -11,6 +11,6 @@ Example program that increases by 3 in an infinite loop.
 |4|OUT   |0100|1110 0000|Output the value of the A register|
 |5|JMP  3|0101|0110 0011|Jump to instruction 3|
 
-[![YouTube video of computer](../resources/yt-inc-by-three-thumb.png)](https://www.youtube.com/watch?v=IgK4RUf5AlI "Click to play")
+[![YouTube video of computer](../resources/yt-increase-by-three-thumb.png)](https://www.youtube.com/watch?v=IgK4RUf5AlI "Click to play")
 
 This program is from [Adding more machine language instructions to the CPU](https://www.youtube.com/watch?v=FCscQGBIL-Y).
