@@ -12,7 +12,7 @@ In a Fibonacci sequence each number is the sum of the two preceding ones, starti
 | 3|LDI  1|0011|0101 0001|Put the value 1 in the A-register|
 | 4|STA 14|0100|0100 1110|Store the value from the A-register in the Y variable|
 | 5|OUT   |0101|1110 0000|Output the value of the A-register|
-| 6|ADD 13|0110|0010 1101|Put the value of the X variable in the B-register and store A+B in the A-register|
+| 6|ADD 13|0110|0010 1101|Put the value of the X variable in the B-register<br>and store A+B in the A-register|
 | 7|JC   0|0111|0111 0000|Jump to instruction 0 if the A-register is past 255|
 | 8|STA 15|1000|0100 1111|Store the value from the A-register in the Z variable|
 | 9|LDA 14|1001|0001 1110|Put the value of the Y variable in the A-register|

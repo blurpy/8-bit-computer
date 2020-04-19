@@ -7,7 +7,7 @@ Example program that increases by 3 in an infinite loop.
 | 0|LDI  3|0000|0101 0011|Put the value 3 in the A-register|
 | 1|STA 15|0001|0100 1111|Store the value 3 from the A-register in the X variable|
 | 2|LDI  0|0010|0101 0000|Put the value 0 in the A-register|
-| 3|ADD 15|0011|0010 1111|Put the value of the X variable in the B-register and store A+B in the A-register|
+| 3|ADD 15|0011|0010 1111|Put the value of the X variable in the B-register<br>and store A+B in the A-register|
 | 4|OUT   |0100|1110 0000|Output the value of the A-register|
 | 5|JMP  3|0101|0110 0011|Jump to instruction 3|
 |  |      |    |         |              |
