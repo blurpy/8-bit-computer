@@ -13,7 +13,7 @@ Example program that counts up and down between 0 and 255 in an infinite loop.
 | 6|JZ   0|0110|1000 0000|Jump to instruction 0 if the A-register is 0|
 | 7|JMP  4|0111|0110 0100|Jump to instruction 4|
 |  |      |    |         |                     |
-|15|      |1111|0000 0001|The X variable predefined with the value 1|
+|15|     X|1111|0000 0001|The X variable predefined with the value 1|
 
 This table displays the values of registers, variables and output after the first 5 iterations of the program, and at the 2 points where it switches between increasing and decreasing.
 
