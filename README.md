@@ -8,4 +8,4 @@ See the computer in action:
 
 [![YouTube video of computer](resources/yt-fibonacci-thumb.png)](https://www.youtube.com/watch?v=DTxpwynaN34 "Click to play")
 
-More programs with videos and the assembly code can be seen in [programs](programs). The instruction set is described in [instruction_set.md](instruction_set.md). See [issues.md](issues.md) for a list of the issues I had with getting the computer to work reliably, and what I did to fix them.
+More programs with videos and the assembly code can be seen in [programs](programs). The instruction set is described in [instruction_set.md](instruction_set.md), and the control lines in [control_lines.md](control_lines.md). See [issues.md](issues.md) for a list of the issues I had with getting the computer to work reliably, and what I did to fix them.
