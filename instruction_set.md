@@ -4,7 +4,7 @@ The full instruction set of the 8-bit computer.
 
 The instructions can either reference a 4-bit memory address or a 4-bit value in the operand.
 
-|#|Name|Full name|Opcode|Operand|Flags set|Flags read|Description|
+|#|Mnemonic|Name|Opcode|Operand|Flags set|Flags read|Description|
 |---|------|----|---------|------------|----|---|---|
 |0|NOP|No operation|0000|Unused| | |Do nothing for a cycle|
 |1|LDA|Load the accumulator|0001|Memory reference| | |Put the value of the referenced memory address into the A-register|
