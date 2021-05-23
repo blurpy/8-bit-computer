@@ -1,8 +1,8 @@
 # Microcode
 
-This is a table of how instructions map to the control lines in the CPU microcode in the EEPROMs.
+This is a table of how instructions are decoded, or mapped to the control lines in the CPU microcode in the EEPROMs.
 
-An instruction consists of 5 steps (binary 000 -> 100), where the first 2 steps in every instruction is FETCH. FETCH is not an actual instruction, but included in the table at the top to avoid repetition. The FETCH step is used to load the next instruction from memory into the instruction register. The other instructions are described in [instruction_set.md](instruction_set.md), and the control lines in [control_lines.md](control_lines.md). 
+An instruction consists of 5 steps, or microinstructions. In binary they are represented as 000 -> 100, seen in the red LEDs, and as individual steps, or T-states, seen in the green LEDs. The first 2 steps in every instruction is FETCH. FETCH is not an actual instruction, but included in the table at the top to avoid repetition. The FETCH step is used to load the next instruction from memory into the instruction register. The other instructions are described in [instruction_set.md](instruction_set.md), and the control lines in [control_lines.md](control_lines.md). 
 
 Every clock cycle increases the step counter until it reaches 5 and then it wraps around and starts at 1 again. The line in this table to execute after FETCH is decided based on the opcode in the instruction register, the current step, and the flags. That's why some instructions show 2 lines for the same step with different flags. Only one of the lines will be executed at that step.
 
