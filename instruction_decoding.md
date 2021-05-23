@@ -1,4 +1,4 @@
-# Microcode
+# Instruction decoding
 
 This is a table of how instructions are decoded, or mapped to the control lines in the CPU microcode in the EEPROMs.
 
