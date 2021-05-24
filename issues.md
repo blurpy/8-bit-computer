@@ -3,7 +3,7 @@
 I ran into many issues trying to get the 8-bit computer to work. This is my documentation of the issues and the fixes.
 
 
-## #1 LEDs without resistors
+## LEDs without resistors
 
 I started by following the videos step by step, and when it came to testing the first register I couldn't get it to work. The red LEDs on the register would be very faint and randomly on/off, and the yellow LEDs on the temporary bus would not light up at all.
 
@@ -27,7 +27,7 @@ The blue were a bit bright with the 220Ω resistors, so I went with 1kΩ resisto
 I used the clear blue 12v LEDs for the ALU carry and zero bits (not the flags). They are way too bright on 12v, but fine on 5v.
 
 
-## #2 Single stepping the clock leads to occasional double step
+## Single stepping the clock leads to occasional double step
 
 Video showcasing the glitch:
 
@@ -42,7 +42,7 @@ The problem is in the monostable 555 timer circuit that is supposed to handle de
 ![Oscilloscope screenshot of double step glitch](resources/clock_double_step_cap.jpg)
 
 
-## #3 Long single steps leads to spurious clock ticks
+## Long single steps leads to spurious clock ticks
 
 Video showcasing the glitch:
 
@@ -61,7 +61,7 @@ The same test looks much better afterwards:
 And the clock only ticks once when keeping the button pressed.
 
 
-## #4 RAM resonance glitch
+## RAM resonance glitch
 
 Video showcasing the glitch:
 
