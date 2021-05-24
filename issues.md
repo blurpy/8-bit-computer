@@ -7,7 +7,7 @@ I ran into many issues trying to get the 8-bit computer to work. This is my docu
 
 I started by following the videos step by step, and when it came to testing the first register I couldn't get it to work. The red LEDs on the register would be very faint and randomly on/off, and the yellow LEDs on the temporary bus would not light up at all.
 
-The booklet that came with the kit suggested adding resistors to the LEDs, but there wasn't any room on the breadboard for that. I found a good tip in this post on reddit: [What I Have Learned (a master list of what to do and what not to do](https://www.reddit.com/r/beneater/comments/dskbug/what_i_have_learned_a_master_list_of_what_to_do/)
+The booklet that came with the kit suggested adding resistors to the LEDs, but there wasn't any room on the breadboard for that. I found a good tip in this post on reddit: [What I Have Learned (a master list of what to do and what not to do)](https://www.reddit.com/r/beneater/comments/dskbug/what_i_have_learned_a_master_list_of_what_to_do/)
 
 I soldered resistors to the LEDs as suggested, and the register started working like in the video.
 
@@ -59,3 +59,24 @@ The same test looks much better afterwards:
 ![Oscilloscope screenshot of spurious ticks fix](resources/clock_spurious_step_ne555p.png)
 
 And the clock only ticks once when keeping the button pressed.
+
+
+## #4 RAM resonance glitch
+
+Video showcasing the glitch:
+
+[![YouTube video of ram glitch](resources/yt-ram-resonance-glitch.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
+
+Everything seemed to work fine when building the RAM module and testing it in isolation. However, when I started connecting the other modules the whole thing started behaving erratic.  
+
+The problem stems from the clock signal that goes into the NAND-gate on the right, through the RC-circuit. The capacitor creates some resonance that travels back through the clock wires and disturbs everything else connected to the same clock, leading to registers latching out of phase with the actual clock.
+
+This shows the original circuit:
+
+![todo](resources/ram_resonance_pre_fix.jpg)
+
+And this shows the fixed circuit. The NAND-gate is used to isolate the clock signal by running it through the inverter 2 times before being sent to the RC-circuit.
+
+![todo](resources/ram_resonance_post_fix.jpg)
+
+More about this issue on Reddit: [What I Have Learned](https://www.reddit.com/r/beneater/comments/dskbug/what_i_have_learned_a_master_list_of_what_to_do/).
