@@ -65,7 +65,7 @@ And the clock only ticks once when keeping the button pressed.
 
 Video showcasing the glitch:
 
-[![YouTube video of ram glitch](resources/yt-ram-resonance-glitch.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
+[![YouTube video of ram glitch](resources/yt-ram-resonance-glitch-thumb.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
 
 Everything seemed to work fine when building the RAM module and testing it in isolation. However, when I started connecting the other modules the whole thing started behaving erratic.  
 
@@ -73,10 +73,10 @@ The problem stems from the clock signal that goes into the NAND-gate on the righ
 
 This shows the original circuit:
 
-![todo](resources/ram_resonance_pre_fix.jpg)
+![RAM NAND original circuit](resources/ram_resonance_pre_fix.jpg)
 
 And this shows the fixed circuit. The NAND-gate is used to isolate the clock signal by running it through the inverter 2 times before being sent to the RC-circuit.
 
-![todo](resources/ram_resonance_post_fix.jpg)
+![RAM NAND fixed circuit](resources/ram_resonance_post_fix.jpg)
 
 More about this issue on Reddit: [What I Have Learned](https://www.reddit.com/r/beneater/comments/dskbug/what_i_have_learned_a_master_list_of_what_to_do/).
