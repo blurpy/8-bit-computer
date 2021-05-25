@@ -65,7 +65,7 @@ And the clock only ticks once when keeping the button pressed.
 
 Video showcasing the glitch:
 
-[![YouTube video of ram glitch](resources/yt-ram-resonance-glitch-thumb.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
+[![YouTube video of RAM resonance glitch](resources/yt-ram-resonance-glitch-thumb.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
 
 Everything seemed to work fine when building the RAM module and testing it in isolation. However, when I started connecting the other modules the whole thing started behaving erratic.  
 
@@ -80,3 +80,22 @@ And this shows the fixed circuit. The NAND-gate is used to isolate the clock sig
 ![RAM NAND fixed circuit](resources/ram_resonance_post_fix.jpg)
 
 More about this issue on Reddit: [What I Have Learned](https://www.reddit.com/r/beneater/comments/dskbug/what_i_have_learned_a_master_list_of_what_to_do/).
+
+
+## RAM mode switch changes memory content
+
+Video showcasing the glitch:
+
+[![YouTube video of RAM mode switch glitch](resources/yt-ram-mode-glitch-thumb.png)](https://www.youtube.com/watch?v=y0mx79ixhco "Click to play")
+
+The problem happens when pressing the mode switch on the RAM module for choosing between run mode and programming mode. Sometimes when pressing the switch the RAM content in the current memory address is changed to something random.
+
+The reason can be seen on the oscilloscope:
+
+![Oscilloscope screenshot of RAM mode switch pressed](resources/ram_mode_switch_press.png)
+
+The oscilloscope probe is connected to pin 12 of the 74LS157, that goes to pin 3 of the 74189, which is the active-low write-enable pin. The signal should be high when it's not writing to the RAM, but sometimes there is a dip in the signal when pressing the mode switch, making it write whatever it can see on the inputs at the moment. The switch probably has a debounce problem. Putting a 104 capacitor (highlighted) on pin 12 to VCC solves the issue. The signal is not affected anymore when pressing the mode switch after that.
+
+![RAM mode switch capacitor fix](resources/ram_mode_switch_cap.jpg)
+
+Note that I'm not using the mode switch that came with the kit.
