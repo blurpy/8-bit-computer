@@ -99,3 +99,22 @@ The oscilloscope probe is connected to pin 12 of the 74LS157, that goes to pin 3
 ![RAM mode switch capacitor fix](resources/ram_mode_switch_cap.jpg)
 
 Note that I'm not using the mode switch that came with the kit.
+
+
+## Noise on the reset line
+
+Video showcasing the glitch:
+
+[![YouTube video of reset glitch](resources/yt-reset-noise-glitch-thumb.png)](https://www.youtube.com/watch?v=n3ou3BL5uEU "Click to play")
+
+The video shows the program for counting back and forth between 0 and 255, and when it's supposed to go from 126 to 127 it goes from 126 to 1 instead.
+
+Looking at the reset line connected to the 74LS173 flags register on pin 15 (CLR) we can see quite a bit of noise, including a large spike on the right side at 1.84v. The spike is enough to cause the A register to reset to 0 at the last step of the ADD instruction in the video, when it's about to move 127 from the ALU to the bus. Since the A register turns 0, and the B register is 1, the result of the ADD is 1 which is stored in the A register and displayed shortly after as part of the OUT instruction.
+
+I'm guessing the noise spikes on the reset line are related to power. In this example the ALU has 7 LEDs enabled, the A register has 6. When trying to enable 7 LEDs on the bus it causes a sudden power increase and creates noise that resets the A register.
+
+![Oscilloscope screenshot of reset noise](resources/reset_line_noise.png)
+
+Putting a 104 capacitor (highlighted) on the reset line to ground on the flags register removes the noise and solves the issue.
+
+![Reset noise capacitor fix](resources/reset_line_cap.jpg)
