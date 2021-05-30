@@ -33,11 +33,11 @@ Video showcasing the glitch:
 
 [![YouTube video of double step glitch](resources/yt-double-step-glitch-thumb.png)](https://www.youtube.com/watch?v=wE0VCkTokac "Click to play")
 
-Notice the very thin dip about 2/3 of the way into the button click. This is enough for it to register as 2 clock ticks:
+The video shows me single stepping the clock. After a few steps, we can see the program counter going from `1000` to `1010` from one click of the button, skipping very quickly past the expected value of `1001`. The oscilloscope in the video shows the output from the button. Notice the very thin dip about 2/3 of the way. This is enough for it to register as 2 clock ticks. The same can be seen in this screenshot:
 
 ![Oscilloscope screenshot of double step glitch](resources/clock_double_step.png)
 
-The problem is in the monostable 555 timer circuit that is supposed to handle debouncing. The size of the capacitor used on pin 6 decides how long the debounce lasts, and the capacitor used by default in the kit is 0.1μF (104). This works fine usually, but not every time. Replacing it with a 0.33μF (334) capacitor makes the debounce much more reliable:
+The problem is in the monostable 555 timer circuit that is supposed to handle debouncing. The size of the capacitor used on pin 6 decides how long the debounce lasts, and the capacitor used by default in the kit is 0.1μF (104). This works fine usually, but not every time. Replacing it with a 0.33μF (334) capacitor makes the debounce much more reliable.
 
 ![Oscilloscope screenshot of double step glitch](resources/clock_double_step_cap.jpg)
 
