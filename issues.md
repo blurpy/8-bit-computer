@@ -164,3 +164,29 @@ I tried many different strategies, but what worked the best for me was having la
 This picture demonstrates all the fixes:
 
 ![Power on the breadboard](resources/power.jpg)
+
+
+## Replacement parts
+
+Other than those mentioned elsewhere.
+
+1. Slide switches
+
+The slide switches that came with the kit were troublesome. They would not sit firmly on the breadboard, and it was difficult to use them without bumping into other components in the tight space. I replaced them with these push buttons instead:
+
+* [NKK BB16AP - Miniature Pushbutton Switch](https://www.elfadistrelec.no/en/miniature-pushbutton-switch-1co-on-on-white-nkk-bb16ap/p/30141579)
+
+2. DIP switches
+
+I had a bad experience with the DIP switches as well. Every time I tried to use them, they would pop out of the breadboard. I replaced them with these, and they sit perfectly on a breadboard:
+
+* [RND 210-00641 - DIP Switch, 8 Positions](https://www.elfadistrelec.no/en/dip-switch-slide-positions-54mm-pcb-pins-rnd-components-rnd-210-00641/p/30161218)
+* [RND 210-00637 - DIP Switch, 4 Positions](https://www.elfadistrelec.no/en/dip-switch-slide-positions-54mm-pcb-pins-rnd-components-rnd-210-00637/p/30161214)
+
+3. Breadboard wire
+
+I ran out of green breadboard wire while working on the last kit. Ordering more wire from Jameco would be very expensive due to customs, but I tried the wire from SparkFun, and it was very similar to the original one.
+
+* [SparkFun PRT-11367 - Solid Core Hook-Up Wire 7.6m](https://www.elfadistrelec.no/en/solid-core-hook-up-wire-assortment-6m-sparkfun-electronics-prt-11367/p/30145492)
+
+These parts can be seen in the pictures of the computer.
