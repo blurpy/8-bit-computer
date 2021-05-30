@@ -118,3 +118,20 @@ I'm guessing the noise spikes on the reset line are related to power. In this ex
 Putting a 104 capacitor (highlighted) on the reset line to ground on the flags register removes the noise and solves the issue.
 
 ![Reset noise capacitor fix](resources/reset_line_cap.jpg)
+
+
+## Memory address resetting
+
+Video showcasing the glitch:
+
+[![YouTube video of MAR reset glitch](resources/yt-mar-reset-glitch-thumb.png)](https://www.youtube.com/watch?v=8U1HI5aMM8Q "Click to play")
+
+The video shows the program for counting back and forth between 0 and 255, but in steps of 31 instead of 1, as can be seen from the binary value of 0001 1111 in the B register. The program seems to get a bit stuck when counting down, taking a long time before continuing. 
+
+The trick to provoking this issue is calculations with larger values. Lower values like the regular counting by 1 works like expected.
+
+The problem starts when it's at the last instruction of the program, and jumps to memory address 4. As soon as the memory address changes to 0100, which is the subtract instruction, the memory address resets to 0, and the output instruction at address 0 is loaded into the instruction register instead of the subtract instruction. This effectively makes that round in the loop a no-op. This happens a few times before it eventually manages to load the subtract instruction and gets one step further in the countdown. In the video we see the struggle from 124 > 93 > 62, and it's slightly easier to get to 31, and very easy to get to 0, as well as counting up.
+
+There is noise on the reset line on the memory address register as well, but putting a capacitor on pin 15 doesn't completely fix the issue, even though it helps a bit. What fixes it is adding a 104 decoupling capacitor across VCC (pin 16) and ground (pin 8) on the 74LS173, like shown below. The position is very awkward, so be sure not to short any of the pins.
+
+![MAR reset capacitor fix](resources/mar_decoupling_cap.jpg)
