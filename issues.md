@@ -137,3 +137,30 @@ The problem starts when it's at the last instruction of the program, and jumps t
 There is noise on the reset line on the memory address register as well, but putting a capacitor on pin 15 doesn't completely fix the issue, even though it helps a bit. What fixes it is adding a 104 decoupling capacitor across VCC (pin 16) and ground (pin 8) on the 74LS173, like shown below. The position is very awkward, so be sure not to short any of the pins.
 
 ![MAR reset capacitor fix](resources/mar_decoupling_cap.jpg)
+
+
+## Power
+
+Reliable power is important for a stable computer. These are the fixes I did.
+
+1. Bad connection with the breadboard.
+
+I originally used breadboard wire with dupont pins from the terminal connector of the power supply to the breadboard. The dupont pins didn't make good enough contact to transfer the power required, so LEDs would change in intensity all the time, and touching the power wires or moving the breadboard would make the whole computer blink and sometimes reset.
+
+To make a better connection I soldered much more solid wire to 2x4 header pins and that solved the problem fully. 
+
+2. Low voltage.
+
+I started with a 180cm commercial cable with banana plugs on one end and a terminal plug on the other end, but under load I noticed it would lose about 0.4v. I have the power supply set to 5.1v and on the pins connected to the breadboard it would read 4.7v, and on the opposite side of the bus it would be as low as 4.4v.
+
+To avoid unnecessary voltage loss, I made my own cable, using thicker wires and also much shorter at only 60cm. The voltage on the pins connected to the breadboard now read 5.05v.
+
+3. Power fluctuations.
+
+That's where capacitors are helpful, they make sure power spikes don't bring the voltage too low.
+
+I tried many different strategies, but what worked the best for me was having larger capacitors on each side of the power connector, and lots of the 104 capacitors that came with the kit spread on the power rails of each breadboard.  
+
+This picture demonstrates all the fixes:
+
+![Power on the breadboard](resources/power.jpg)
