@@ -42,17 +42,17 @@ The problem is in the monostable 555 timer circuit that is supposed to handle de
 ![Oscilloscope screenshot of double step glitch](resources/clock_double_step_cap.jpg)
 
 
-## Long single steps leads to spurious clock ticks
+## Long single step leads to spurious clock ticks
 
 Video showcasing the glitch:
 
 [![YouTube video of double step glitch](resources/yt-spurious-step-glitch-thumb.png)](https://www.youtube.com/watch?v=cVWIPq9-fGs "Click to play")
 
-Notice the amount of high frequency noise in the signal as the single step button is pressed:
+The video shows me single stepping the clock by holding the button down, and the program counter increments at a very rapid rate. The oscilloscope in the video shows the output from the button. Notice the amount of high frequency noise in the signal from the button. The same can be seen in this screenshot:
 
 ![Oscilloscope screenshot of spurious ticks glitch](resources/clock_spurious_step_lm555cn.png)
 
-This is related to the same monostable 555 timer circuit as in the previous issue. But for some reason the signal is clean for a short period when first pressing the button, but pretty soon it gets very noisy. I fixed it by replacing the monostable timer, a Fairchild LM555CN, with a Texas Instruments NE555P. 
+This is related to the same monostable 555 timer circuit as in the previous issue. But for some reason the signal is clean for a short period when first pressing the button, but pretty soon it gets very noisy. I fixed it by replacing the monostable timer that came with the kit, a Fairchild LM555CN, with a Texas Instruments NE555P I had lying around. 
 
 The same test looks much better afterwards:
 
