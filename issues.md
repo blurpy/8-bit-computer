@@ -61,13 +61,15 @@ The same test looks much better afterwards:
 And the clock only ticks once when keeping the button pressed.
 
 
-## RAM resonance glitch
+## Registers latching out of phase with the clock
 
 Video showcasing the glitch:
 
 [![YouTube video of RAM resonance glitch](resources/yt-ram-resonance-glitch-thumb.png)](https://www.youtube.com/watch?v=abie2o01HV0 "Click to play")
 
-Everything seemed to work fine when building the RAM module and testing it in isolation. However, when I started connecting the other modules the whole thing started behaving erratic.  
+The video shows a program running that should count from 0 to 15 in repeat. The program counter and the bus are reacting much faster than the clock, and when looking at the output display we can also see that it skips values, counting 0 -> 2 -> 5 -> 11 -> 15. I have a temporary configuration in place where I can move between the original circuit and the fixed circuit to demonstrate that it counts normal with the fixed circuit.
+
+Everything seemed to work fine when building the RAM module and testing it in isolation. However, when I started connecting the other modules the whole thing started behaving erratic, like in the video.  
 
 The problem stems from the clock signal that goes into the NAND-gate on the right, through the RC-circuit. The capacitor creates some resonance that travels back through the clock wires and disturbs everything else connected to the same clock, leading to registers latching out of phase with the actual clock.
 
@@ -105,7 +107,7 @@ Note that I'm not using the mode switch that came with the kit.
 
 Video showcasing the glitch:
 
-[![YouTube video of reset glitch](resources/yt-reset-noise-glitch-thumb.png)](https://www.youtube.com/watch?v=n3ou3BL5uEU "Click to play")
+[![YouTube video of A register reset glitch](resources/yt-reset-noise-glitch-thumb.png)](https://www.youtube.com/watch?v=n3ou3BL5uEU "Click to play")
 
 The video shows the program for counting back and forth between 0 and 255, and when it's supposed to go from 126 to 127 it goes from 126 to 1 instead.
 
