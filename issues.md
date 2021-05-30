@@ -88,20 +88,20 @@ Video showcasing the glitch:
 
 [![YouTube video of RAM mode switch glitch](resources/yt-ram-mode-glitch-thumb.png)](https://www.youtube.com/watch?v=y0mx79ixhco "Click to play")
 
-The problem happens when pressing the mode switch on the RAM module for choosing between run mode and programming mode. Sometimes when pressing the switch the RAM content in the current memory address is changed to something random.
+The video shows repeated switching between run mode and programming mode on the RAM module. The address set by the DIP switch is `1111`, and that address in RAM contains the value `0000 1110`. The MAR itself is set to `0001` and that address in RAM contains the value `1100 1111`. The first mode switches works fine, but suddenly the value in RAM at address `0001` changes to `0000 0010`.
 
 The reason can be seen on the oscilloscope:
 
 ![Oscilloscope screenshot of RAM mode switch pressed](resources/ram_mode_switch_press.png)
 
-The oscilloscope probe is connected to pin 12 of the 74LS157, that goes to pin 3 of the 74189, which is the active-low write-enable pin. The signal should be high when it's not writing to the RAM, but sometimes there is a dip in the signal when pressing the mode switch, making it write whatever it can see on the inputs at the moment. The switch probably has a debounce problem. Putting a 104 capacitor (highlighted) on pin 12 to VCC solves the issue. The signal is not affected anymore when pressing the mode switch after that.
+The oscilloscope probe is connected to pin 12 of the 74LS157 (next to the program button), that goes to pin 3 of the 74189, which is the active-low write-enable pin. The signal should be high when it's not writing to the RAM, but sometimes there is a dip in the signal when pressing the mode switch, making it write whatever it can see on the inputs at the moment. The switch probably has a debounce problem. Putting a 104 capacitor (highlighted) on pin 12 to VCC solves the issue. The signal is not affected anymore when pressing the mode switch after that.
 
 ![RAM mode switch capacitor fix](resources/ram_mode_switch_cap.jpg)
 
 Note that I'm not using the mode switch that came with the kit.
 
 
-## Noise on the reset line
+## A register resetting
 
 Video showcasing the glitch:
 
@@ -115,22 +115,22 @@ I'm guessing the noise spikes on the reset line are related to power. In this ex
 
 ![Oscilloscope screenshot of reset noise](resources/reset_line_noise.png)
 
-Putting a 104 capacitor (highlighted) on the reset line to ground on the flags register removes the noise and solves the issue.
+Putting a 104 capacitor (highlighted) on the reset line to ground on the flags register removes the noise and solves the issue. It's a bit cramped on the A register itself, but the reset line is directly connected between the flags register and the A register, so that's probably why it still has the desired effect.
 
 ![Reset noise capacitor fix](resources/reset_line_cap.jpg)
 
 
-## Memory address resetting
+## Memory address register resetting
 
 Video showcasing the glitch:
 
 [![YouTube video of MAR reset glitch](resources/yt-mar-reset-glitch-thumb.png)](https://www.youtube.com/watch?v=8U1HI5aMM8Q "Click to play")
 
-The video shows the program for counting back and forth between 0 and 255, but in steps of 31 instead of 1, as can be seen from the binary value of 0001 1111 in the B register. The program seems to get a bit stuck when counting down, taking a long time before continuing. 
+The video shows the program for counting back and forth between 0 and 255, but in steps of 31 instead of 1, as can be seen from the binary value of `0001 1111` in the B register. The program seems to get a bit stuck when counting down, taking a long time before continuing. 
 
 The trick to provoking this issue is calculations with larger values. Lower values like the regular counting by 1 works like expected.
 
-The problem starts when it's at the last instruction of the program, and jumps to memory address 4. As soon as the memory address changes to 0100, which is the subtract instruction, the memory address resets to 0, and the output instruction at address 0 is loaded into the instruction register instead of the subtract instruction. This effectively makes that round in the loop a no-op. This happens a few times before it eventually manages to load the subtract instruction and gets one step further in the countdown. In the video we see the struggle from 124 > 93 > 62, and it's slightly easier to get to 31, and very easy to get to 0, as well as counting up.
+The problem starts when it's at the last instruction of the program, and jumps to memory address 4. As soon as the memory address changes to `0100`, which is the subtract instruction, the memory address resets to 0, and the output instruction at address 0 is loaded into the instruction register instead of the subtract instruction. This effectively makes that round in the loop a no-op. This happens a few times before it eventually manages to load the subtract instruction and gets one step further in the countdown. In the video we see the struggle from 124 > 93 > 62, and it's slightly easier to get to 31, and very easy to get to 0, as well as counting up.
 
 There is noise on the reset line on the memory address register as well, but putting a capacitor on pin 15 doesn't completely fix the issue, even though it helps a bit. What fixes it is adding a 104 decoupling capacitor across VCC (pin 16) and ground (pin 8) on the 74LS173, like shown below. The position is very awkward, so be sure not to short any of the pins.
 
