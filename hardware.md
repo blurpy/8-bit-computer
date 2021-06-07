@@ -46,6 +46,8 @@ The diagram above has all the components, but most of the wiring is not displaye
 
 ## Clock
 
+The clock is a square wave at 50% duty cycle and is used for triggering and synchronizing operations in the computer. Supports variable speed from 1.5Hz to 1kHz and also single stepping.
+
 * Chips
   * 3x 555
     * The first is in astable mode. It generates a 50% duty cycle square wave for a continuous clock timer.
@@ -71,7 +73,11 @@ The diagram above has all the components, but most of the wiring is not displaye
   * HLT: halts the clock.
 
 
-## Memory Address Register
+## Memory Address Register (MAR)
+
+A 4-bit (0->15) register that keeps track of the active memory address for the RAM. 
+
+Can be put in programming mode together with the RAM for manual control with DIP-switches.
 
 * Chips
   * 74LS173 register: for storing the current 4-bit address in run mode.
@@ -88,7 +94,13 @@ The diagram above has all the components, but most of the wiring is not displaye
   * MI: store a 4-bit address from the bus in the MAR.
 
 
-## Random Access Memory
+## Random Access Memory (RAM)
+
+16 bytes of static RAM.
+
+Any of the 16 bytes can be read and written to, but it behaves like a regular 8-bit register in that it only works with 1 byte at a time. The MAR must be used for selecting which byte to read from or write to.
+
+Can be put in programming mode together with the MAR for manual control with DIP-switches.
 
 * Chips
   * 2x 74189 RAM: for storing for 16 bytes of data or instructions. The outputs are inverted.
