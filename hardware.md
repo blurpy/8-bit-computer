@@ -146,8 +146,8 @@ The instruction register is very similar to the general purpose A and B register
 * Outputs
   * The opcode: goes directly to the instruction decoder.
 * LEDs
-  * 4 Blue: shows the opcode.
-  * 4 Yellow: shows the operand.
+  * 4x Blue: shows the opcode.
+  * 4x Yellow: shows the operand.
 * Control lines
   * II: store an 8-bit value from the bus in the register.
   * IO: put the 4-bit operand of the instruction to the bus.
@@ -170,10 +170,23 @@ TODO
 
 ## A + B Register
 
-TODO
+These are 2 independent 8-bit general purpose registers, primarily used in combination with the ALU.
+
+* Chips
+  * 2x 74LS173 register: these are used for storing an 8-bit value.
+  * 74LS245 buffer: to control when the register is outputting to the bus.
+* Outputs
+  * Current value from both registers goes directly to the ALU.
+* LEDs
+  * 8x Red: shows the value in the register.
+* Control lines
+  * AI: store an 8-bit value from the bus in the A register.
+  * AO: put the 8-bit from the A register onto the bus.
+  * BI: store an 8-bit value from the bus in the B register.
+  * BO: put the 8-bit from the B register onto the bus. This line is not in use in any of the current instructions.
 
 
-## ALU
+## Arithmetic Logic Unit (ALU)
 
 TODO
 
