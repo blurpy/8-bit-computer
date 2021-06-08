@@ -134,7 +134,23 @@ Reset button that connects to all the different parts of the computer to clear t
 
 ## Instruction Register
 
-TODO
+8-bit register that contains the currently executing instruction.
+
+Instructions are made up of an opcode and an operand, both 4 bits each. The opcode tells which instruction to execute while the operand contains extra data related to the instruction, like a memory address to jump to, or a small value to put into another register. See [instruction_set.md](instruction_set.md) for more about instructions.
+
+The instruction register is very similar to the general purpose A and B registers, except how it's used. The 4 bits for the opcode goes to the instruction decoder, and only the 4 bits of the operand can be put out onto the bus.
+
+* Chips
+  * 2x 74LS173 register: these are used for storing the 8-bit instruction.
+  * 74LS245 buffer: to control when it's outputting to the bus.
+* Outputs
+  * The opcode: goes directly to the instruction decoder.
+* LEDs
+  * 4 Blue: shows the opcode.
+  * 4 Yellow: shows the operand.
+* Control lines
+  * II: store an 8-bit value from the bus in the register.
+  * IO: put the 4-bit operand of the instruction to the bus.
 
 
 ## Step Counter
