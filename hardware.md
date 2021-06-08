@@ -188,7 +188,80 @@ These are 2 independent 8-bit general purpose registers, primarily used in combi
 
 ## Arithmetic Logic Unit (ALU)
 
-TODO
+An 8-bit ALU that can do addition and subtraction based on the values in the A- and B-registers, and output the result to the bus.
+
+Addition is performed as `A-register + B-register` and stored as soon as any of the registers change value, without waiting for the clock to tick.
+
+Subtraction can be invoked using the `S-` control line to perform a recalculation as `A-register - B-register`. Subtraction is a one off operation and not a state change, so the result will be overwritten using addition when `S-` turns off.
+
+Both types of calculations result in some status bits being set.
+
+The bits are:
+- Carry: whether the calculation results in a number larger than 8 bit (255) and has wrapped around.
+- Zero: whether the calculation results in 0.
+
+The bits change immediately after a calculation. The carry bit is part of the adder chips, while the zero bit is calculated using additional circuitry that was added to support the flags register.
+
+Subtraction happens using two's compliment.
+
+Example: 
+```
+30 - 12
+30  = 0001 1110
+12  = 0000 1100
+```
+
+Since the computer only does addition, we can convert 12 to -12 using two's compliment, and then think of the calculation as 30 + -12.
+
+Two's compliment of 12 is done by inverting the bits and adding 1.
+
+```
+Inverted 12 = 1111 0011
+         +1 = 1111 0100
+            = 244
+```
+
+The calculation then becomes:
+
+```
+30 + 244 = 274
+274 = 1 0001 0010
+```
+
+Or 18 (`0001 0010`) + the carry bit
+
+This is why the carry bit LED is often on when subtracting.
+
+The carry bit is not set when the result is 255 and less. 
+Example:
+
+```
+0 - 1
+0 = 0000 0000
+1 = 0000 0001
+Inverted 1 = 1111 1110
+        +1 = 1111 1111
+           = 255
+0 + 255 = 255 (no carry needed)
+```
+
+Technically this is solved using the XOR gates and `S-`. The B register is connected to one of the sets of inputs, and `S-` to the other sets of inputs. When `S-` is enabled, the XOR gates will output the inverted value of the B register, and when it's disabled it will output the original value of the B register. That output goes into the adders. To get the +1 we need for two's compliment we send `S-` to carry in on the adders as well.
+
+* Chips
+  * 2x 74LS283 adder: to support 8-bit addition.
+  * 2x 74LS86 XOR gate: to invert the value in the B register when `S-` is enabled, to support subtraction.
+  * 74LS245 buffer: to control when the result is outputted to the bus.
+* Inputs
+  * Current value from both A and B registers.
+* Outputs
+  * Carry bit: goes to the flags register.
+  * Result: goes to the flags register circuitry for the zero bit.
+* LEDs
+  * 8x Red: shows the result of the calculation.
+  * Blue: shows if there is a carry in the result.
+* Control lines
+  * SO: put the 8-bit result onto the bus.
+  * S-: calculate using subtraction instead of addition.
 
 
 ## Flags Register
