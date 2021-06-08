@@ -124,7 +124,12 @@ Can be put in programming mode together with the MAR for manual control with DIP
 
 ## Reset
 
-TODO
+Reset button that connects to all the different parts of the computer to clear the state. This is required before starting a program since the computer comes up in a random state, and when restarting a program.
+
+* Chips
+  * 74LS00 NAND gate: for creating the necessary signals that will reset the other chips.
+* Inputs
+  * Push button: for initiating a reset.
 
 
 ## Instruction Register
