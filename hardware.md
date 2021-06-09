@@ -62,7 +62,7 @@ The clock is a square wave at 50% duty cycle and is used for triggering and sync
   * Toggle switch: for switching between continuous mode or single step mode.
 * Outputs
   * The normal clock signal.
-  * The inverted clock signal.
+  * The inverted clock signal. This is just the normal clock signal sent through the inverter.
 * LEDs
   * 3x Yellow
     * The first shows the square wave from the first 555 timer.
@@ -155,7 +155,19 @@ The instruction register is very similar to the general purpose A and B register
 
 ## Step Counter
 
-TODO
+The step counter is a simple 3 bit binary counter, that counts in a loop from 0 to 4. The current step is shown both in binary and decimal using LEDs, and is used by the instruction decoder to know which of the 5 steps of the current instruction to execute.  These steps are also called T-states, or timing states. 
+
+Incrementing the steps happens on the inverted clock to give the instruction decoder time to prepare the control lines before the next normal clock tick.
+
+* Chips
+  * 74LS161 counter: for doing the counting.
+  * 74LS138 demultiplexer: used for converting the binary value from the counter into decimal. Also used for resetting the counter after it reaches step 5.
+* Outputs
+  * 3-bit step: goes directly into the instruction decoder.
+* LEDs
+  * 3x Red: shows the current step in binary. Note that the bit order is opposite compared to the other binary displays, so 4 is `001` instead of `100`.
+  * 5x Green: shows the current step, as the LED that is off.
+  * 1x Blue: shows the inverted clock.
 
 
 ## Instruction Decoder
