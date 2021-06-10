@@ -91,7 +91,7 @@ Can be put in programming mode together with the RAM for manual control with DIP
   * Green/Red mode: for showing the mode. Green for run mode and red for programming mode.
   * 4x Yellow address LEDs: shows the current 4-bit address in the selected mode.
 * Control signals
-  * MI: store a 4-bit address from the bus in the MAR.
+  * MI: store a 4-bit address from the bus in the MAR, on the next clock tick.
 
 
 ## Random Access Memory (RAM)
@@ -118,7 +118,7 @@ Can be put in programming mode together with the MAR for manual control with DIP
 * LEDs
   * 8 Red LEDs: for showing the 8-bit value at the current address in RAM.
 * Control signals
-  * RI: store an 8-bit value from the bus in the current memory address.
+  * RI: store an 8-bit value from the bus in the current memory address, on the next clock tick.
   * RO: put an 8-bit value from the current memory address to the bus.
 
 
@@ -149,7 +149,7 @@ The instruction register is very similar to the general purpose A and B register
   * 4x Blue: shows the opcode.
   * 4x Yellow: shows the operand.
 * Control lines
-  * II: store an 8-bit value from the bus in the register.
+  * II: store an 8-bit value from the bus in the register, on the next clock tick.
   * IO: put the 4-bit operand of the instruction to the bus.
 
 
@@ -204,9 +204,9 @@ These are 2 independent 8-bit general purpose registers, primarily used in combi
 * LEDs
   * 8x Red: shows the value in the register.
 * Control lines
-  * AI: store an 8-bit value from the bus in the A register.
+  * AI: store an 8-bit value from the bus in the A register, on the next clock tick.
   * AO: put the 8-bit from the A register onto the bus.
-  * BI: store an 8-bit value from the bus in the B register.
+  * BI: store an 8-bit value from the bus in the B register, on the next clock tick.
   * BO: put the 8-bit from the B register onto the bus. This line is not in use in any of the current instructions.
 
 
