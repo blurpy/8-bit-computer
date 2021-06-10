@@ -177,16 +177,28 @@ TODO
 
 ## Program Counter
 
-TODO
+4-bit counter (0->15) that keeps track of the memory location of the next instruction to execute.
 
+Normal operation is to output the current value to the bus during the fetch cycle, and increment by 1 afterwards. Also supports jumping to a memory location read from the bus.
+
+* Chips
+  * 74LS245 buffer: to control when it's outputting to the bus.
+  * 74LS161 counter: for doing the counting.
+* LEDs
+  * 4x Green: shows the value in the counter.
+* Control lines
+  * CE: increment the counter by 1, on the next clock tick.
+  * CO: put the 4-bit value from the counter onto the bus.
+  * CJ: jump, by overwriting the current counter with a 4-bit value from the bus, on the next clock tick.
+  
 
 ## A + B Register
 
 These are 2 independent 8-bit general purpose registers, primarily used in combination with the ALU.
 
 * Chips
-  * 2x 74LS173 register: these are used for storing an 8-bit value.
   * 74LS245 buffer: to control when the register is outputting to the bus.
+  * 2x 74LS173 register: these are used for storing an 8-bit value.
 * Outputs
   * Current value from both registers goes directly to the ALU.
 * LEDs
@@ -260,9 +272,9 @@ Inverted 1 = 1111 1110
 Technically this is solved using the XOR gates and `S-`. The B register is connected to one of the sets of inputs, and `S-` to the other sets of inputs. When `S-` is enabled, the XOR gates will output the inverted value of the B register, and when it's disabled it will output the original value of the B register. That output goes into the adders. To get the +1 we need for two's compliment we send `S-` to carry in on the adders as well.
 
 * Chips
+  * 74LS245 buffer: to control when the result is outputted to the bus.
   * 2x 74LS283 adder: to support 8-bit addition.
   * 2x 74LS86 XOR gate: to invert the value in the B register when `S-` is enabled, to support subtraction.
-  * 74LS245 buffer: to control when the result is outputted to the bus.
 * Inputs
   * Current value from both A and B registers.
 * Outputs
