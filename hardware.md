@@ -172,7 +172,36 @@ Incrementing the steps happens on the inverted clock to give the instruction dec
 
 ## Instruction Decoder
 
-TODO
+The instruction decoder is responsible for orchestrating the control lines of the computer to make it do something useful.
+
+The control lines are the switches to the supported operations of the different parts, like RAM In and Instruction Register Out. Typically an operation either reads (in) from the bus or writes (out) to the bus.
+
+Every instruction takes 5 steps (microinstructions) to complete, called the instruction cycle, split into 2 phases.
+
+The first phase is the fetch phase. It consists of 2 steps that are the same every time:
+- step 0: Put the current value of the program counter into the memory address register.
+- step 1: Put the value of the RAM at the current address into the instruction register and increment the program counter.
+
+At this point the instruction decoder have access to the opcode from the instruction register, and the execution phase begins. The last 3 steps will differ for each instruction. An example could be to load some data from a specified location in RAM into the B-register, and store the sum of the A-register and B-register into the A-register. This is the ADD instruction.
+
+To make everything work, the instruction decoder gets which step to execute from the step counter on the falling edge of the clock cycle. It will then prepare the control lines for a particular step of a particular instruction, and that combination is called a control word. Output operations are executed right away, while input operations are executed on the next rising edge of the clock cycle.
+
+Some instructions also use flags to make decisions.
+
+See [instruction_decoding.md](instruction_decoding.md) for more details.
+
+* Chips
+  * 2x AT28C16 EEPROM: for the microcode that selects which control lines are to be enabled, based on the input.
+  * 2x 74LS04 inverter: for inverting control signals going to active low inputs, like the memory address in, so the microcode and the LEDs don't have to worry about whether a signal being "on" activates or deactivates a function.
+* Inputs
+  * 3-bit step counter value.
+  * 4-bit opcode from the instruction register. 
+  * 2-bit flags, carry and zero, from the flags register.
+* Outputs
+  * 16x control lines.
+* LEDs
+  * 16x Blue: for showing which control lines are active.
+  * 2x Blue: these are with the others, but are connected to 2 control lines that are manually controlled.
 
 
 ## Program Counter
