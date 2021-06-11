@@ -54,8 +54,8 @@ The clock is a square wave at 50% duty cycle and is used for triggering and sync
     * The second is in monostable mode. It's used as a debounce circuit for the single step push button, to generate a manual pulse.
     * The third is in bistable mode. It's used as a debounce circuit for mode toggle switch.
   * 74LS04 inverter: these 3 last chips are for creating the logic circuit that allows outputting the clock signal from the selected mode, as well as disabling the clock output when halted.
-  * 74LS08 AND gate
-  * 74LS32 OR gate
+  * 74LS08 AND gate: see above.
+  * 74LS32 OR gate: see above.
 * Inputs
   * Potentiometer: for controlling the speed of the clock.
   * Push button: for single stepping the clock.
@@ -68,7 +68,7 @@ The clock is a square wave at 50% duty cycle and is used for triggering and sync
     * The first shows the square wave from the first 555 timer.
     * The second shows the debounced output of the second 555 timer.
     * The third shows the mode the clock is in. The LED is off in single step mode and on in continuous mode.
-  * Blue: this LED shows the normal outgoing clock signal, either in sync with the clock timer or the single steps. 
+  * 1x Blue: this LED shows the normal outgoing clock signal, either in sync with the clock timer or the single steps. 
 * Control signals
   * HLT: halts the clock.
 
@@ -116,7 +116,7 @@ Can be put in programming mode together with the MAR for manual control with DIP
   * 8-bit DIP switch: for setting the value at the current address in programming mode.
   * Toggle switch: for switching between run mode and programming mode. From the MAR. Goes into all the multiplexers.
 * LEDs
-  * 8 Red LEDs: for showing the 8-bit value at the current address in RAM.
+  * 8x Red LEDs: for showing the 8-bit value at the current address in RAM.
 * Control signals
   * RI: store an 8-bit value from the bus in the current memory address, on the next clock tick.
   * RO: put an 8-bit value from the current memory address to the bus.
@@ -188,7 +188,7 @@ To make everything work, the instruction decoder gets which step to execute from
 
 Some instructions also use flags to make decisions.
 
-See [instruction_decoding.md](instruction_decoding.md) for more details.
+EEPROMs are used for implementing the instruction decoder, based on a simple lookup table. See [instruction_decoding.md](instruction_decoding.md) for more details. They both have 11 address lines for inputs, and 8 outputs. 9 of the address lines are used by the opcode, the step and the flags, and are connected the same on both. The EEPROMs combined offer 16 outputs used as control lines, and one address line (A7) is hard wired differently to make the EEPROMs control 2 different sets of 8 control lines, since they are programmed the same.  
 
 * Chips
   * 2x AT28C16 EEPROM: for the microcode that selects which control lines are to be enabled, based on the input.
@@ -311,7 +311,7 @@ Technically this is solved using the XOR gates and `S-`. The B register is conne
   * Result: goes to the flags register circuitry for the zero bit.
 * LEDs
   * 8x Red: shows the result of the calculation.
-  * Blue: shows if there is a carry in the result.
+  * 1x Blue: shows if there is a carry in the result.
 * Control lines
   * SO: put the 8-bit result onto the bus.
   * S-: calculate using subtraction instead of addition.
@@ -343,7 +343,7 @@ I included the circuitry for the zero bit here, but it can be debated whether it
   * 2x Green: for showing the value of the flags.
   * 1x Blue: for showing the value of the zero bit.
 * Control lines
-  * Flags register in: stores the current value of the carry bit and zero bit into the register, on the next clock tick.
+  * FI: stores the current value of the carry bit and zero bit into the register, on the next clock tick.
 
 
 ## Output Register
