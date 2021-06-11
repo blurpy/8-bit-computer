@@ -319,7 +319,31 @@ Technically this is solved using the XOR gates and `S-`. The B register is conne
 
 ## Flags Register
 
-TODO
+Register used for flags.
+
+Flags are 1 bit values (0 or 1 / false or true) that can be stored and used for making decisions by the instruction decoder.
+
+The flags are:
+- Carry: whether the ALU calculation results in a number larger than 8 bit (255) and has wrapped around.
+- Zero: whether the ALU calculation results in 0.
+
+I included the circuitry for the zero bit here, but it can be debated whether it's part of the ALU or the flags register. I chose here, because the ALU by itself does not use the extra chips for anything, while the flags register depend on them.
+
+* Chips
+  * 74LS173 register: for storing the 2 flags.
+  * 74LS02 NOR gate: these gates make up the circuit that will detect if all the bits from the result in the ALU is 0. This becomes the zero bit.
+  * 74LS08 AND gate: see above.
+* Inputs
+  * Carry bit: from the ALU.
+  * 8-bit result from the ALU: for checking for 0.
+* Outputs
+  * 1-bit carry flag: goes directly into the instruction decoder.
+  * 1-bit zero flag: goes directly into the instruction decoder.
+* LEDs
+  * 2x Green: for showing the value of the flags.
+  * 1x Blue: for showing the value of the zero bit.
+* Control lines
+  * Flags register in: stores the current value of the carry bit and zero bit into the register, on the next clock tick.
 
 
 ## Output Register
