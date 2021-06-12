@@ -1,6 +1,6 @@
 # 8-bit-computer
 
-This is my 8-bit computer. Based on a project by Ben Eater. https://eater.net/8bit
+This is my 8-bit computer. Based on a project by Ben Eater.
 
 [![Image of computer](resources/8-bit-computer-600w.jpg)](resources/8-bit-computer.jpg)
 
@@ -19,3 +19,10 @@ See [8-bit-computer-emulator](https://github.com/blurpy/8-bit-computer-emulator)
 * [control_lines.md](control_lines.md) describes the different control lines. 
 * [instruction_decoding.md](instruction_decoding.md) contains the lookup table used by the instruction decoder, and a short description of how it works.
 * [issues.md](issues.md) describes a list of the issues I had with getting the computer to work reliably, and what I did to fix them.
+
+
+## Links
+
+* [eater.net/8bit](https://eater.net/8bit) - Homepage of the computer, for schematics, kits and more.
+* [/r/beneater](https://www.reddit.com/r/beneater/) - Useful subreddit to get help when building.
+* [Building an 8-bit breadboard computer](https://www.youtube.com/playlist?list=PLowKtXNTBypGqImE405J2565dvjafglHU) - Videos by Ben Eater on how to build the computer.
