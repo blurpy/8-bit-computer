@@ -49,7 +49,7 @@ The diagram above has all the components, but most of the wiring is not displaye
 The clock is a square wave at 50% duty cycle and is used for triggering and synchronizing operations in the computer. Supports variable speed from 1.5Hz to 1kHz and also single stepping.
 
 * Chips
-  * 3x 555
+  * 3x 555 timer
     * The first is in astable mode. It generates a 50% duty cycle square wave for a continuous clock timer.
     * The second is in monostable mode. It's used as a debounce circuit for the single step push button, to generate a manual pulse.
     * The third is in bistable mode. It's used as a debounce circuit for mode toggle switch.
@@ -348,4 +348,34 @@ I included the circuitry for the zero bit here, but it can be debated whether it
 
 ## Output Register
 
-TODO
+The register that drives the four 7-segment LEDs, for displaying an 8-bit value that can be signed or unsigned.
+
+The normal operation is the unsigned mode, where the 8-bit value goes from 0 to 255.
+The signed mode allows it to display values from -128 to 127. This is the same two's compliment representation of numbers as used in the ALU for subtraction. The first bit is the sign, so counting from 0 to 255 in this mode would go like this:
+
+```
+     0 (0000 0000)
+     1 (0000 0001) (skip...)
+   126 (0111 1110)
+   127 (0111 1111)
+  -128 (1000 0000)
+  -127 (1000 0001) (skip...)
+    -1 (1111 1111)
+```
+
+The way the display works is by multiplexing the 7-segment LEDs, which is a very common way of working with these. The concept is that only one LED is displaying at any time, and you cycle through them very fast to create an illusion of a solid display.
+
+The circuit has a separate clock and counter for that cycling. The counter decides which LED is active, and the EEPROM uses a lookup table to know which of the segments of that LED to enable to get the correct number displayed.
+
+* Chips
+  * 555 timer: used as an independent clock for the counter.
+  * 74LS107 flip-flop: used as a 2-bit counter that increments on clock ticks.
+  * 74LS139 demultiplexer: converts the 2-bit counter into 4 separate lines to control the LEDs.  
+  * AT28C16 EEPROM: for the microcode that converts the binary value into which segments to enable on the LEDs. 
+  * 74LS273 register: for storing the 8-bit value to display.
+  * 74LS08 AND gate: used for combining the clock signal with the control signal to decide when to store a value from the bus into the register, since the register lacks an enable pin.
+* LEDs
+  * 4x 7-segment LED: for showing a binary value in decimal.
+* Control lines
+  * OI: store an 8-bit value from the bus in the register, on the next clock tick.
+  * O-: enable signed mode. This line is not in use in any of the current instructions.
