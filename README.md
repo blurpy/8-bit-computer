@@ -8,7 +8,7 @@ See the computer in action:
 
 [![YouTube video of computer](resources/yt-fibonacci-thumb.png)](https://www.youtube.com/watch?v=DTxpwynaN34 "Click to play")
 
-See [8-bit-computer-emulator](https://github.com/blurpy/8-bit-computer-emulator) for a version of this computer implemented in software.
+See [8-bit-computer-emulator](https://github.com/blurpy/8-bit-computer-emulator) for a version of this computer implemented in software. See [8-bit-computer-eeprom](https://github.com/blurpy/8-bit-computer-eeprom) for code for generating microcode for the EEPROMs.
 
 
 ## Documentation
