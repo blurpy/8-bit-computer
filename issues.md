@@ -190,3 +190,9 @@ I ran out of green breadboard wire while working on the last kit. Ordering more 
 * [SparkFun PRT-11367 - Solid Core Hook-Up Wire 7.6m](https://www.elfadistrelec.no/en/solid-core-hook-up-wire-assortment-6m-sparkfun-electronics-prt-11367/p/30145492)
 
 These parts can be seen in the pictures of the computer.
+
+4. Clock capacitor
+
+I replaced the 1μF electrolytic capacitor on the astable 555 timer with a 0.47μF (474) ceramic capacitor instead, to give me a faster clock. This allows the clock to go from 1.5Hz to 1kHz, instead of 0.7Hz to 500Hz.
+
+![Capacitor used for controlling speed](resources/clock_speed_cap.jpg)

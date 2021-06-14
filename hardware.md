@@ -367,6 +367,8 @@ The way the display works is by multiplexing the 7-segment LEDs, which is a very
 
 The circuit has a separate clock and counter for that cycling. The counter decides which LED is active, and the EEPROM uses a lookup table to know which of the segments of that LED to enable to get the correct number displayed.
 
+The clock runs at 760Hz, making the counter enable each LED 190 times per second.
+
 * Chips
   * 555 timer: used as an independent clock for the counter.
   * 74LS107 flip-flop: used as a 2-bit counter that increments on clock ticks.
