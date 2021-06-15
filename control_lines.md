@@ -12,11 +12,13 @@
 |AO|A register out|
 |BI|B register in|
 |BO|B register out (not connected)|
-|S-|ALU subtract mode|
-|SO|ALU sum register out|
+|S- (_SU_)|ALU subtract mode|
+|SO (_EO_)|ALU sum register out|
 |OI|Output display register in|
 |O-|Output display signed mode (not connected)|
 |CE|Program counter enable. Increment on clock pulse.|
 |CO|Program counter out|
-|CJ|Program counter jump (program counter in)|
+|CJ (_J_)|Program counter jump (program counter in)|
 |FI|Flags register in|
+
+_Code in parentheses is what Ben uses in the videos._
