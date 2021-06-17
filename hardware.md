@@ -381,3 +381,14 @@ The clock runs at 760Hz, making the counter enable each LED 190 times per second
 * Control lines
   * OI: store an 8-bit value from the bus in the register, on the next clock tick.
   * O-: enable signed mode. This line is not in use in any of the current instructions.
+
+
+## Thermals
+
+The computer runs pretty cool. None of the chips get hot to the touch.
+
+The image below was taken after more than 30 minutes of continuously running the program that counts between 0 and 255, at high speed. It's interesting to see that there are 2 "hot spots". The first is the 74189 RAM chips, which is not that surprising. The second is the 74LS08 AND gate on the output register, which I do find surprising.
+
+Also interesting to note that the power wires along the top right corner get hotter than the rest of the power wiring. It might be a good spot to make improvements to power transportation.
+
+![Thermal image of the computer](resources/thermal.jpg)
