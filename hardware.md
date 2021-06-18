@@ -44,6 +44,14 @@ The diagram above has all the components, but most of the wiring is not displaye
 |AT28C16|16Kb (2K x 8 bits) EEPROM|
 
 
+## Bus
+
+The bus is an 8-bit wide signal path used for communication between the different parts of the computer. The instruction decoder decides who can read and write to the bus at any point in time, to avoid concurrency issues.
+
+* LEDs
+  * 8x Red: for showing the current value on the bus.
+
+
 ## Clock
 
 The clock is a square wave at 50% duty cycle and is used for triggering and synchronizing operations in the computer. Supports variable speed from 1.5Hz to 1kHz and also single stepping.
