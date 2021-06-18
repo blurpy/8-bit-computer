@@ -86,7 +86,7 @@ Can be put in programming mode together with the RAM for manual control with DIP
   * 4-bit DIP switch: for setting the address in programming mode.
   * Toggle switch: for switching between run mode and programming mode. Also applies to the RAM.
 * Outputs
-  * The 4-bit address from the selected run mode goes to the RAM.
+  * The 4-bit address from the selected mode goes to the RAM.
 * LEDs
   * 1x Green: for showing when it's in run mode.
   * 1x Red: for showing when it's in programming mode.
@@ -207,7 +207,7 @@ EEPROMs are used for implementing the instruction decoder, based on a simple loo
 
 ## Program Counter
 
-4-bit counter (0->15) that keeps track of the memory location of the next instruction to execute.
+4-bit counter that keeps track of the memory location of the next instruction to execute.
 
 Normal operation is to output the current value to the bus during the fetch cycle, and increment by 1 afterwards. Also supports jumping to a memory location read from the bus.
 
@@ -378,7 +378,7 @@ The clock runs at 760Hz, making the counter enable each LED 190 times per second
   * 74LS273 register: for storing the 8-bit value to display.
   * 74LS08 AND gate: used for combining the clock signal with the control signal to decide when to store a value from the bus into the register, since the register lacks an enable pin.
 * LEDs
-  * 4x 7-segment LED: for showing a binary value in decimal.
+  * 4x 7-segment LEDs: for showing a binary value in decimal.
 * Control lines
   * OI: store an 8-bit value from the bus into the register, on the next clock tick.
   * O-: enable signed mode. This line is not in use in any of the current instructions.
@@ -388,7 +388,7 @@ The clock runs at 760Hz, making the counter enable each LED 190 times per second
 
 The computer runs pretty cool. None of the chips get hot to the touch.
 
-The image below was taken after more than 30 minutes of continuously running the program that counts between 0 and 255, at high speed. It's interesting to see that there are 2 "hot spots". The first is the 74189 RAM chips, which is not that surprising. The second is the 74LS08 AND gate on the output register, which I do find surprising.
+The image below was taken after more than 30 minutes of continuously running the program that counts between 0 and 255, at high speed. It's interesting to see that there are 2 "hot spots". The first is the 74189 RAM chips, which is not that surprising. The second is the 74LS08 AND gate on the output register, which I do find surprising. I am not sure why that gets hotter than other chips.
 
 Also interesting to note that the power wires along the top right corner get hotter than the rest of the power wiring. It might be a good spot to make improvements to power transportation.
 
