@@ -75,7 +75,7 @@ The clock is a square wave at 50% duty cycle and is used for triggering and sync
 
 ## Memory Address Register (MAR)
 
-A 4-bit (0->15) register that keeps track of the active memory address for the RAM. 
+A 4-bit register that keeps track of the active memory address for the RAM. 
 
 Can be put in programming mode together with the RAM for manual control with DIP-switches.
 
@@ -88,10 +88,11 @@ Can be put in programming mode together with the RAM for manual control with DIP
 * Outputs
   * The 4-bit address from the selected run mode goes to the RAM.
 * LEDs
-  * Green/Red mode: for showing the mode. Green for run mode and red for programming mode.
+  * 1x Green: for showing when it's in run mode.
+  * 1x Red: for showing when it's in programming mode.
   * 4x Yellow address LEDs: shows the current 4-bit address in the selected mode.
 * Control signals
-  * MI: store a 4-bit address from the bus in the MAR, on the next clock tick.
+  * MI: store a 4-bit address from the bus into the MAR, on the next clock tick.
 
 
 ## Random Access Memory (RAM)
@@ -103,23 +104,23 @@ Any of the 16 bytes can be read and written to, but it behaves like a regular 8-
 Can be put in programming mode together with the MAR for manual control with DIP-switches.
 
 * Chips
-  * 2x 74189 RAM: for storing for 16 bytes of data or instructions. The outputs are inverted.
+  * 2x 74189 RAM: for storing 16 bytes of data or instructions. The outputs are inverted.
   * 2x 74LS04 inverter: to invert back the data in the RAM.
   * 74LS245 buffer: to control when it's outputting to the bus.
-  * 3x 74LS159 multiplexer
-    * The first is used for controlling whether the program button or the RI control signal can write to the RAM depending on mode.
-    * The two others are used for selecting between the 8-bits of data coming from the bus or from the DIP-switch depending on mode.
+  * 3x 74LS157 multiplexer
+    * The first is used for controlling whether the program button, or the RI control signal can write to the RAM, depending on mode.
+    * The two others are used for selecting between the 8-bits of data coming from the bus, or from the DIP-switch, depending on mode.
   * 74LS00 NAND gate: enables the RI control signal only on the rising edge of the clock. 
 * Inputs
   * 4-bit memory address from the MAR.
   * Push button: for setting the value from the DIP switch into the current memory address of the RAM in programming mode.
-  * 8-bit DIP switch: for setting the value at the current address in programming mode.
+  * 8-bit DIP switch: for setting the value to be put into RAM when pushing the button, in programming mode.
   * Toggle switch: for switching between run mode and programming mode. From the MAR. Goes into all the multiplexers.
 * LEDs
   * 8x Red LEDs: for showing the 8-bit value at the current address in RAM.
 * Control signals
-  * RI: store an 8-bit value from the bus in the current memory address, on the next clock tick.
-  * RO: put an 8-bit value from the current memory address to the bus.
+  * RI: store an 8-bit value from the bus into the current memory address, on the next clock tick.
+  * RO: put an 8-bit value from the current memory address onto the bus.
 
 
 ## Reset
@@ -149,8 +150,8 @@ The instruction register is very similar to the general purpose A and B register
   * 4x Blue: shows the opcode.
   * 4x Yellow: shows the operand.
 * Control lines
-  * II: store an 8-bit value from the bus in the register, on the next clock tick.
-  * IO: put the 4-bit operand of the instruction to the bus.
+  * II: store an 8-bit value from the bus into the register, on the next clock tick.
+  * IO: put the 4-bit operand of the instruction onto the bus.
 
 
 ## Step Counter
@@ -233,9 +234,9 @@ These are 2 independent 8-bit general purpose registers, primarily used in combi
 * LEDs
   * 8x Red: shows the value in the register.
 * Control lines
-  * AI: store an 8-bit value from the bus in the A register, on the next clock tick.
+  * AI: store an 8-bit value from the bus into the A register, on the next clock tick.
   * AO: put the 8-bit from the A register onto the bus.
-  * BI: store an 8-bit value from the bus in the B register, on the next clock tick.
+  * BI: store an 8-bit value from the bus into the B register, on the next clock tick.
   * BO: put the 8-bit from the B register onto the bus. This line is not in use in any of the current instructions.
 
 
@@ -379,7 +380,7 @@ The clock runs at 760Hz, making the counter enable each LED 190 times per second
 * LEDs
   * 4x 7-segment LED: for showing a binary value in decimal.
 * Control lines
-  * OI: store an 8-bit value from the bus in the register, on the next clock tick.
+  * OI: store an 8-bit value from the bus into the register, on the next clock tick.
   * O-: enable signed mode. This line is not in use in any of the current instructions.
 
 
